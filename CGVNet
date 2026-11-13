@@ -1,0 +1,19 @@
+```
+
+## 1. Install
+```bash
+pip install -r requirements.txt          # PyTorch ≥ 2.3 (install the CUDA build from pytorch.org)
+```
+
+
+## 3. Run
+```bash
+python make_dummy_data.py --out data/dummy                       # optional smoke test
+python main.py --data-root data/--quick --stage all
+
+python main.py --data-root data/ISL_emotion --stage all          # full run (Table 2: lr 1e-3, 100 epochs, bs 32, Adam, wd 5e-3)
+python main.py --stage ablation --repeats 3                      # a single analysis
+python main.py --stage kfold --models CGVNet,CNN,MIL_ViT --kfold-values 5,10
+```
+The stages are cached, so run them in order once (`prepare → frpnet → jaanet → features`). After that
+every analysis can be rerun on its own.
